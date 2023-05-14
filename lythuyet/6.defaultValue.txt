@@ -1,0 +1,21 @@
+để setDefault value cho form ta có thể dùng 
+
+interface IFormData {
+  username: string;
+  password: string;
+  channel: string;
+}
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },   //lấy lỗi ở trong form ra để show
+  } = useForm<IFormData>({
+    defaultValue: {   //defaultValue cũng có thể nhận giá trị trả về từ 1 hàm async bình thường
+        username: "abc",
+        email : "abc@gmail.com"
+        channel: "channel1"
+    }
+  });
+
+  **các giá trị username, email, channel là các giá trị trong register

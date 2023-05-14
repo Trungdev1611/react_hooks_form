@@ -1,0 +1,10 @@
+import { DevTool } from "@hookform/devtools";
+<div className="form_wrapper">
+      <form action="" className="form_test">
+        //.....abc
+      </form>
+      <DevTool control={control} /> {/* set up the dev tool --thằng này nó sẽ xuất hiện bên phải màn hình
+      bật lên để theo dõi change, tương tác từng trường các thứ, valuechange
+      Touched: đã tương tác hay chưa, dirty là đã change hay chưa
+      */} 
+    </div>

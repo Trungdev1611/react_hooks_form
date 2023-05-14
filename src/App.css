@@ -1,0 +1,33 @@
+.form_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+.form_test {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+}
+.form_test h2 {
+  text-align: center;
+}
+.form_test input, .form_test select {
+  padding: 8px 5px;
+  outline: none;
+  border: 1px solid grey;
+
+
+}
+.form_test button {
+  padding: 5px;
+  background-color: rgb(37, 25, 145);
+  color: white;
+
+}
+
+.error {
+  color: red
+}

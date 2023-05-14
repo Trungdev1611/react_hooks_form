@@ -1,0 +1,14 @@
+<form action="" className="form_test">
+        <input type="text" placeholder="Username" 
+     {...register("username", {
+            onChange: e => console.log(11111, e.target.value)
+        })} 
+        />
+ 
+</form>
+
+ const { register, control, handleSubmit } = useForm();
+
+ register được lấy từ useForm từ reactHooksForm, register là một function nhận
+ name của input hoặc select làm tham số và trả ra 4 method cho select hoặc input đó
+ onChange, onBlur, ref, name

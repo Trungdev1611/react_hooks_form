@@ -1,0 +1,55 @@
+1. Nếu muốn add thêm nhiều pattern trong 1 input hoặc 1 select của react-hook-form ta có thể sử dụng giá trị là 1 mảng 
+các object thay vì 1 object như trước
+
+ {...register("username", {
+          required: true,
+          pattern: [
+            {
+              value: /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/,
+              message: "Tên người dùng không hợp lệ",
+            },
+            {
+              value: /^[A-Za-z0-9_-]+@[A-Za-z0-9_-]+\.[A-Za-z]{2,6}$/,
+              message: "Email không hợp lệ",
+            },
+          ],
+        })}
+
+Hoặc ta cũng có thể sử dụng validate property để tiến hành thực hiện validate
+
+ {...register("username", {
+          required: true,
+          pattern: {
+              value: /^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/,
+              message: "Tên người dùng không hợp lệ",
+            },
+            validate: (fieldValue) => {
+                if(check(fieldValue) ) {
+                return message......
+
+                }
+            }
+            
+        })}
+
+
+VD:   <input
+          type="password"
+          placeholder="Password"
+          {...register("password", {
+            required: {
+              value: true,
+              message: "Password is required",
+            },
+            validate: (fieldValue) => {
+                if(fieldValue === "trungphamk53@gmail.com") {
+                    return `Không được chọn email này, Vui lòng thử lại!`
+                }
+                if(fieldValue.length<15) {
+                    return "Email quá ngắn"
+                }
+            }
+          })}
+        />
+
+//hoặc cũng có thể giá trị của validate là 1 object với tên trường bất kỳ để thực hiện validate 

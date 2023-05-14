@@ -1,0 +1,37 @@
+1. react hook form có formState:{errors} ở bên trong useForm
+
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },   //lấy lỗi ở trong form ra để show
+  } = useForm<IFormData>();
+
+  khi có lỗi nào validate được bắt, lỗi sẽ nằm trong này
+
+2. Việc cài đặt các quy tắc để bắt lỗi có thể được thực hiện như sau 
+
+       <input
+          type="text"
+          placeholder="Username"
+          {...register("username", {
+            onChange: (e) => console.log(11111, e.target.value),
+            required: {
+              value: true,
+              message: "Username is required",
+            },
+            pattern: {
+              value: /(?=.*[A-Z])/,
+              message: "Phải có ít nhất 1 chữ in hoa trường username",
+            },
+          })}
+        />
+{errors.username && <div className="error">{errors.username.message}</div>} //dòng này để show lỗi ra
+** với required là bắt buộc, pattern là check regex, ngoài ra còn rất nhiều giá trị khác như min, max, minLength, maxLength .....
+
+3. Việc bắt lỗi như trên được thực hiện khi form được submit. Nếu ta muốn thay đổi không muốn đến khi 
+submit form mới bắt lỗi ta có thể thay đổi mode ở trong useForm({mode: value})
+
+mode: onChange | onBlur | onSubmit | onTouched | all = 'onSubmit'
+
+https://react-hook-form.com/api/useform/#mode

@@ -1,0 +1,42 @@
+interface FormValue {
+    username: string,
+    password:string,
+    channel: string
+}
+
+const { register, control, handleSubmit } = useForm<FormValue>();
+
+function submitFn(data:FormValue) {
+    console.log(data)  //data ở đây sẽ có dạng object {
+        username: value,
+        password: value,
+        channel:value
+    }
+}
+  <form action="" className="form_test" onSubmit = {handleSubmit(submitFn)}>
+        <h2>React hooks form {countRender /2}</h2>
+        <input type="text" placeholder="Username" 
+        {...register("username", {
+        onChange: e => console.log(11111, e.target.value)
+        })} 
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          {...register("password")}
+        />
+        <select
+          placeholder="Channel"
+          {...register("channel")}
+          id="channel"
+          aria-label="label for the select"
+        >
+          <option>Channel1</option>
+          <option>Channel2</option>
+          <option>Channel3</option>
+          <option>Channel4</option>
+        </select>
+        <button>Submit</button>
+      </form>
+
+function handlesubmit nhận submitFn mình tạo ra như 1 callback ở sự kiện onSubmit form

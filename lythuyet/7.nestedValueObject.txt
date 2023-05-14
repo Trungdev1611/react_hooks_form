@@ -1,0 +1,18 @@
+ {...register("social.property1")}
+
+ {...register("username")}
+
+ {...register("phoneNumber.0")}
+
+ {...register("phoneNumber.1")}
+
+khi đó giá trị của dataform đầu ra sẽ là
+{
+    social: {
+        property1: value1
+    },
+    username: value2,
+    phoneNumber: ["123", "456"]
+}
+
+**khi ta đặt default value ta cũng phải đặt như đầu ra bên trên
