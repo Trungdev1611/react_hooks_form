@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
 interface IFormData {
@@ -11,6 +11,7 @@ interface IFormData {
     facebook: string;
   };
   phoneNumber: string[];
+  phNumber: {number: string}[]
 }
 let countRender = 0;
 const Form_reactHookForm = () => {
@@ -29,15 +30,31 @@ const Form_reactHookForm = () => {
         facebook: "trungfacebook",
       },
       phoneNumber: ["0979398501", "0386896160"],
+      phNumber: [{number: ""}]
     },
     // {mode:"onBlur"}
   });
   //register bao gồm 4 method name, onChange, onBlur, ref nên ta speard chúng
+
   countRender++;
+
+  //dynamic form (add thêm input và xóa input => form động)
+  const { fields, append,  } = useFieldArray({  
+    control, // control props comes from useForm (optional: if you are using FormContext)
+    name: "phNumber", // unique name for your Field Array -name phải giống như đã khai báo bên trên
+  });
+  console.log(`fields`, fields)
+
   console.log(`errors`, errors);
 
   function submitFunction(dataForm: IFormData) {
     console.log(`dataForm`, dataForm);
+  }
+  function addInputform() {
+    //gán thêm input vào form (1 hoặc nhiều đều được) - sử dụng append trong useFieldArray
+    append({   //ngoài append cũng hỗ trợ thêm remove input
+        number: ""
+    })
   }
   return (
     <div className="form_wrapper">
@@ -46,7 +63,7 @@ const Form_reactHookForm = () => {
         className="form_test"
         onSubmit={handleSubmit(submitFunction)}
       >
-        <h2>React hooks form {countRender / 2}</h2>
+        <h2>React hooks form {countRender}</h2>
         <input
           type="text"
           placeholder="Username"
@@ -119,6 +136,16 @@ const Form_reactHookForm = () => {
           placeholder="Số phụ"
           {...register("phoneNumber.1")}
         />
+
+        {/* form dynamic */}
+        {fields.map((field, index) => {
+            return <input
+            key={field.id} // important to include key with field's id
+            {...register(`phNumber.${index}.number`)}  //đặt tên cho từng input riêng biệt
+            placeholder="dynamicForm"
+          />
+        })}
+        <button onClick={addInputform} type="button">add Form</button>
         <button>Submit</button>
       </form>
       <DevTool control={control} />{" "}
