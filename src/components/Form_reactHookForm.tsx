@@ -22,6 +22,7 @@ const Form_reactHookForm = () => {
     control,
     handleSubmit,
     formState: { errors }, //lấy lỗi ở trong form ra để show
+    watch
   } = useForm<IFormData>({
     defaultValues: {
       username: "phamvantrung",
@@ -61,6 +62,11 @@ const Form_reactHookForm = () => {
       number: "",
     });
   }
+
+  //watch value form in ract hooks form same useWatch form antd
+  let dataFormWatch = watch()  //không truyền tham số vào trong hàm watch, toàn bộ value form sẽ được theo dõi
+  let watchmultifield = watch([`username`, `password`])
+  let watchUsername = watch(`username`)
   return (
     <div className="form_wrapper">
       <form
@@ -69,6 +75,12 @@ const Form_reactHookForm = () => {
         onSubmit={handleSubmit(submitFunction)}
       >
         <h2>React hooks form {countRender}</h2>
+
+        {/* data cho toàn bộ form */}
+        <h5>data Form: {JSON.stringify(dataFormWatch)}</h5>  
+        <h5>Watch Multifiled: {JSON.stringify(watchmultifield)}</h5>  
+        <h5>Watch userNamefield: {JSON.stringify(watchUsername)}</h5>  
+
         <input
           type="text"
           placeholder="Username"

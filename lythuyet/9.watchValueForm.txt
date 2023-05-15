@@ -1,0 +1,20 @@
+ const {
+    watch
+  } = useForm<IFormData>()
+
+  Để theo dõi giá trị trường thay đổi giống như useWatch trong antdForm, ta sử dụng watch trong useForm()
+
+string	Watch input value by name (similar to lodash get function)
+string[]	Watch multiple inputs
+undefined	Watch all inputs
+(data: unknown, { name: string, type: string }) => void	Watch all inputs and invoke a callback
+
+  a/ Nếu không truyền tham số (undefined) trong hàm watch(), toàn bộ data form sẽ được theo dõi
+   let dataFormWatch = watch()  //không truyền tham số vào trong hàm watch, toàn bộ value form sẽ được theo dõi
+ b/ Theo dõi nhiều trường ta truyền mảng tên các trường 
+   let watchmultifield = watch([`username`, `password`])
+ c/ theo dõi 1 trường
+    let watchUserName = watch(`username`)
+
+    **lưu ý watch sẽ có 1 vấn đề sideEffect còn getValues thì không, nếu gặp vấn đề về performance thì cân nhắc tìm cách xóa nó đi trong useEffect 
+    hoặc dùng callback trong watch, hoặc ưu tiên dùng getValues
