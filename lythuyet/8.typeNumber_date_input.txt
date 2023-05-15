@@ -1,0 +1,25 @@
+Để có thể lấy được giá trị đầu ra của input có type là number và date, ta sử dụng như sau
+
+  <input
+          type="number"
+          placeholder="Age"
+          {...register("age",{
+            required: {
+              value: true,
+              message: "Age is required"
+            },
+            valueAsNumber: true    //dòng này để chỉ ra giá trị data trong form sẽ là number thay vì string, reactHookform tự convert
+          })}
+        />
+
+      <input
+          type="date"
+          placeholder="Select date"
+          {...register("date",{
+            required: {
+              value: true,
+              message: "Date is required"
+            },
+            valueAsDate: true    //dòng này để chỉ ra giá trị data trong form sẽ là number thay vì string, reactHookform tự convert
+          })}
+        />

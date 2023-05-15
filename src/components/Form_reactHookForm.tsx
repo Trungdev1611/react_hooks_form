@@ -11,7 +11,9 @@ interface IFormData {
     facebook: string;
   };
   phoneNumber: string[];
-  phNumber: {number: string}[]
+  phNumber: { number: string }[];
+  age: number;
+  date: Date
 }
 let countRender = 0;
 const Form_reactHookForm = () => {
@@ -30,7 +32,9 @@ const Form_reactHookForm = () => {
         facebook: "trungfacebook",
       },
       phoneNumber: ["0979398501", "0386896160"],
-      phNumber: [{number: ""}]
+      phNumber: [{ number: "" }],
+      age: 0,
+      date: new Date()
     },
     // {mode:"onBlur"}
   });
@@ -39,11 +43,11 @@ const Form_reactHookForm = () => {
   countRender++;
 
   //dynamic form (add thêm input và xóa input => form động)
-  const { fields, append,  } = useFieldArray({  
+  const { fields, append } = useFieldArray({
     control, // control props comes from useForm (optional: if you are using FormContext)
     name: "phNumber", // unique name for your Field Array -name phải giống như đã khai báo bên trên
   });
-  console.log(`fields`, fields)
+  console.log(`fields`, fields);
 
   console.log(`errors`, errors);
 
@@ -52,9 +56,10 @@ const Form_reactHookForm = () => {
   }
   function addInputform() {
     //gán thêm input vào form (1 hoặc nhiều đều được) - sử dụng append trong useFieldArray
-    append({   //ngoài append cũng hỗ trợ thêm remove input
-        number: ""
-    })
+    append({
+      //ngoài append cũng hỗ trợ thêm remove input
+      number: "",
+    });
   }
   return (
     <div className="form_wrapper">
@@ -90,7 +95,7 @@ const Form_reactHookForm = () => {
               value: true,
               message: "Password is required",
             },
-            validate: (fieldValue) => {
+            validate: (fieldValue: string) => {
               if (fieldValue === "trungphamk53@gmail.com") {
                 return `Không được chọn email này, Vui lòng thử lại!`;
               }
@@ -137,15 +142,41 @@ const Form_reactHookForm = () => {
           {...register("phoneNumber.1")}
         />
 
+        <input
+          type="number"
+          placeholder="Age"
+          {...register("age", {
+            required: {
+              value: true,
+              message: "Age is required",
+            },
+            valueAsNumber: true, //dòng này để chỉ ra giá trị data trong form sẽ là number thay vì string, reactHookform tự convert
+          })}
+        />
+        <input
+          type="date"
+          placeholder="Select date"
+          {...register("date", {
+            required: {
+              value: true,
+              message: "Date is required",
+            },
+            // valueAsDate: true, //dòng này để chỉ ra giá trị data trong form sẽ là date thay vì string, reactHookform tự convert
+          })}
+        />
         {/* form dynamic */}
-        {fields.map((field, index) => {
-            return <input
-            key={field.id} // important to include key with field's id
-            {...register(`phNumber.${index}.number`)}  //đặt tên cho từng input riêng biệt
-            placeholder="dynamicForm"
-          />
+        {fields.map((field: { number: string; id: number }, index: number) => {
+          return (
+            <input
+              key={field.id} // important to include key with field's id
+              {...register(`phNumber.${index}.number`)} //đặt tên cho từng input riêng biệt
+              placeholder="dynamicForm"
+            />
+          );
         })}
-        <button onClick={addInputform} type="button">add Form</button>
+        <button onClick={addInputform} type="button">
+          add Form
+        </button>
         <button>Submit</button>
       </form>
       <DevTool control={control} />{" "}
