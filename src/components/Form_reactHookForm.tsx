@@ -22,7 +22,7 @@ const Form_reactHookForm = () => {
     control,
     handleSubmit,
     formState: { errors }, //lấy lỗi ở trong form ra để show
-    watch
+    watch,getValues
   } = useForm<IFormData>({
     defaultValues: {
       username: "phamvantrung",
@@ -61,6 +61,13 @@ const Form_reactHookForm = () => {
       //ngoài append cũng hỗ trợ thêm remove input
       number: "",
     });
+  }
+
+  function getValueData() {
+    console.log(`getValuesAll form`,getValues()) // lấy toàn bộ dữ liệu trong form
+    console.log(`getValueinFieldusername`, getValues(`username`))
+    console.log(`getValueinMultifield`, getValues([`username`, `password`]))
+    
   }
 
   //watch value form in ract hooks form same useWatch form antd
@@ -188,6 +195,9 @@ const Form_reactHookForm = () => {
         })}
         <button onClick={addInputform} type="button">
           add Form
+        </button>
+        <button onClick={getValueData} type="button">
+          GetValues
         </button>
         <button>Submit</button>
       </form>

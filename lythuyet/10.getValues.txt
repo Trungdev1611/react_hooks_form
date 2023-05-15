@@ -1,0 +1,14 @@
+getValues là method được sử dụng để getValues form tại thời điểm cụ thể nào đó khi onClick hay tương tự vậy (giống getFiledsValue của AntdForm)
+ 
+getValues không gây re-render như trong watch
+
+  const {
+    watch,getValues
+  } = useForm<IFormData>();
+
+  function getValueData() {
+    console.log(`getValuesAll form`,getValues()) // lấy toàn bộ dữ liệu trong form
+    console.log(`getValueinFieldusername`, getValues(`username`))   //lấy dữ liệu trong trường s
+    console.log(`getValueinMultifield`, getValues([`username`, `password`])) //lấy dữ liệu trong nhiều trường
+    
+  }
