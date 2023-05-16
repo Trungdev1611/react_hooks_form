@@ -23,7 +23,7 @@ const Form_reactHookForm = () => {
     handleSubmit,
     formState: { errors,  isValid }, //lấy lỗi ở trong form ra để show   	
     // isValid: Set to true if the form doesn't have any errors.
-    watch,getValues, setValue
+    watch,getValues, setValue, reset
   } = useForm<IFormData>({
     defaultValues: {
       username: "phamvantrung",
@@ -207,6 +207,9 @@ const Form_reactHookForm = () => {
         </button>
         <button onClick={setValueData} type="button">
           setValueData
+        </button>
+        <button onClick={() => reset()} type="button">
+         Resetform
         </button>
         <button 
         // disabled = {!isValid}
