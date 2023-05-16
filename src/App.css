@@ -23,15 +23,22 @@
 }
 .form_test button {
   padding: 5px;
-  background-color: rgb(37, 25, 145);
+  background-color: green;
   color: white;
 
 }
-
+.form_test button:disabled {
+  background-color: #ccc;
+}
 .error {
   color: red
 }
 h5 {
   padding: 0;
   margin: 0
+}
+.flex {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
 }

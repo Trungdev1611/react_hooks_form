@@ -21,7 +21,8 @@ const Form_reactHookForm = () => {
     register,
     control,
     handleSubmit,
-    formState: { errors }, //lấy lỗi ở trong form ra để show
+    formState: { errors,  isValid }, //lấy lỗi ở trong form ra để show   	
+    // isValid: Set to true if the form doesn't have any errors.
     watch,getValues, setValue
   } = useForm<IFormData>({
     defaultValues: {
@@ -51,6 +52,7 @@ const Form_reactHookForm = () => {
   console.log(`fields`, fields);
 
   console.log(`errors`, errors);
+  console.log(`isValid`, isValid);
 
   function submitFunction(dataForm: IFormData) {
     console.log(`dataForm`, dataForm);
@@ -206,7 +208,9 @@ const Form_reactHookForm = () => {
         <button onClick={setValueData} type="button">
           setValueData
         </button>
-        <button>Submit</button>
+        <button 
+        // disabled = {!isValid}
+        >Submit</button>
         </div>
        
       </form>
