@@ -1,0 +1,30 @@
+react-hook-form cung cấp method trigger để validate form mà không cần phải nhấn button submit (mà bấm 1 button khác)
+
+
+  const {
+ trigger
+  } = useForm<IFormData>({
+    defaultValues: {
+      username: "phamvantrung",
+      password: "123456",
+      channel: "channel1",
+      social: {
+        twiter: "trungtwiter",
+        facebook: "trungfacebook",
+      },
+      phoneNumber: ["0979398501", "0386896160"],
+      phNumber: [{ number: "" }],
+      age: 0,
+      date: new Date()
+    },
+    // {mode:"onBlur"}
+  });
+
+
+
+  <button onClick={() => trigger()} type="button">
+         Check validation
+        </button>
+
+** validate tất cả các trường trigger()
+** validate 1 trường trigger(`username`)
