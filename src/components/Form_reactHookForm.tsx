@@ -22,7 +22,7 @@ const Form_reactHookForm = () => {
     control,
     handleSubmit,
     formState: { errors }, //lấy lỗi ở trong form ra để show
-    watch,getValues
+    watch,getValues, setValue
   } = useForm<IFormData>({
     defaultValues: {
       username: "phamvantrung",
@@ -70,10 +70,13 @@ const Form_reactHookForm = () => {
     
   }
 
+  function setValueData() {
+    setValue("username", "value_new")
+  }
   //watch value form in ract hooks form same useWatch form antd
-  let dataFormWatch = watch()  //không truyền tham số vào trong hàm watch, toàn bộ value form sẽ được theo dõi
-  let watchmultifield = watch([`username`, `password`])
-  let watchUsername = watch(`username`)
+  const dataFormWatch = watch()  //không truyền tham số vào trong hàm watch, toàn bộ value form sẽ được theo dõi
+  const watchmultifield = watch([`username`, `password`])
+  const watchUsername = watch(`username`)
   return (
     <div className="form_wrapper">
       <form
@@ -193,13 +196,19 @@ const Form_reactHookForm = () => {
             />
           );
         })}
+        <div className="flex">
         <button onClick={addInputform} type="button">
           add Form
         </button>
         <button onClick={getValueData} type="button">
           GetValues
         </button>
+        <button onClick={setValueData} type="button">
+          setValueData
+        </button>
         <button>Submit</button>
+        </div>
+       
       </form>
       <DevTool control={control} />{" "}
       {/* set up the dev tool --thằng này nó sẽ xuất hiện bên phải màn hình

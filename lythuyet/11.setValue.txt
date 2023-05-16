@@ -1,0 +1,3 @@
+setValue dùng để set giá trị cho 1 trường trong form. Nếu muốn set giá trị cho nhiều trường, ta phải gọi setValue nhiều lần
+
+setValue("username", "abc")
