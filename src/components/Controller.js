@@ -2,7 +2,11 @@ import "./styles.css";
 import { Controller, useForm } from 'react-hook-form';
 
 export default function App() {
-  const { control, formState: { errors }, handleSubmit } = useForm();
+  const { control, formState: { errors }, handleSubmit } = useForm({
+    defaultValues: {
+      testinput: ""  //phải add defaultvalue không thì có thể sẽ dẫn đến lỗi
+    }
+  });
 
   const submitFn = (data) => {
     //được log ra khi lỗi không tồn tại trong errors
